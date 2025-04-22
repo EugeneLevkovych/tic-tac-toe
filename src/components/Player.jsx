@@ -9,8 +9,6 @@ export default function Player({ initialName, symbol }) {
   }
 
   function handleChange(event) {
-    console.dir(event);
-
     setPlayerName(event.target.value);
   }
 
