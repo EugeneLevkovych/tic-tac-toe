@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
-//import Log from './components/Log'
+import Log from './components/Log'
 
 export default function App() {
   const [gameTurns, setGameTurns] = useState([]);
@@ -41,10 +41,10 @@ export default function App() {
           turns={gameTurns}
         />
       </div>
-      {/* <Log /> */}
+      <Log turns={gameTurns} />
     </main>
   );
 }
 
  
-//mac-mini 4 25
+//mac-mini 4 28
