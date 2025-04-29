@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from './components/Log'; 
+import GameOver from "./components/GameOver";
 import { WINNING_COMBINATIONS } from './winning-combinations';
 
 console.log(WINNING_COMBINATIONS);
@@ -76,7 +77,7 @@ let winner;
             isActive={activePlayer === "O"}
           />
         </ol> 
-        {winner && <p>You won, {winner}!</p>}
+        {winner && <GameOver />}
         <GameBoard
           onSelectSquare={handleSelectSquare}
           board={gameBoard}
