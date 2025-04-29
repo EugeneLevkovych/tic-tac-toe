@@ -5,8 +5,6 @@ import Log from './components/Log';
 import GameOver from "./components/GameOver";
 import { WINNING_COMBINATIONS } from './winning-combinations';
 
-console.log(WINNING_COMBINATIONS);
-
 
 const initialGameBoard = [
   [null, null, null],
@@ -25,6 +23,10 @@ function deriveActivePlayer(gameTurns) {
 }
 
 export default function App() {
+  const [players, setPlayers] = useState({
+    'X': 'Player 1',
+    'O': 'Player 2',
+  });
   const [gameTurns, setGameTurns] = useState([]);
 
  const activePlayer = deriveActivePlayer(gameTurns); 
@@ -46,7 +48,7 @@ let winner;
   const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column];
 
   if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol) {
-   winner = firstSquareSymbol;
+   winner = players[firstSquareSymbol];
   }
  }
 
@@ -68,6 +70,15 @@ const hasDraw = gameTurns.length === 9 && !winner;
     setGameTurns([]);
   }
 
+  function handlePlayerNameChange(symbol, newName) {
+   setPlayers(prevPlayers => {
+    return {
+      ...prevPlayers,
+      [symbol]: newName
+    };
+   });
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -76,11 +87,13 @@ const hasDraw = gameTurns.length === 9 && !winner;
             initialName="Player 1"
             symbol="X"
             isActive={activePlayer === "X"}
+            onChangeName={handlePlayerNameChange}
           />
           <Player
             initialName="Player 2"
             symbol="O"
             isActive={activePlayer === "O"}
+            onChangeName={handlePlayerNameChange}
           />
         </ol> 
         {(winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart} />}
@@ -95,4 +108,3 @@ const hasDraw = gameTurns.length === 9 && !winner;
 }
 
  
-//mac-mini 4 34
